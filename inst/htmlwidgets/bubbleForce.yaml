@@ -1,0 +1,17 @@
+dependencies:
+  - name: d3
+    version: 3.5.2
+    src: htmlwidgets/lib/d3-3.5.2
+    script: d3.min.js
+  - name: jquery
+    version: 1.11.2
+    src: htmlwidgets/lib/jquery
+    script: jquery.min.js
+  - name: jquery.tipsy
+    version: 3.5.2
+    src: htmlwidgets/lib/jquery
+    script: jquery.tipsy.js
+  - name: tipsy.css
+  	version: 1.0.0
+  	src: htmlwidgets/lib/css
+  	link: tipsy.css

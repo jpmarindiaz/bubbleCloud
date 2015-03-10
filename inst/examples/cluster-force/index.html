@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="jquery.tipsy.js"></script>
+
+<!-- http://bl.ocks.org/ilyabo/1373263 -->
+<link rel="stylesheet" type="text/css" href="tipsy.css">
+
+<script>
+
+var width = 560,
+    height = 500,
+    padding = 1.5, // separation between same-color nodes
+    clusterPadding = 6, // separation between different-color nodes
+    maxRadius = 12;
+
+var n = 200, // total number of nodes
+    m = 10; // number of distinct clusters
+
+var color = d3.scale.category10()
+    .domain(d3.range(m));
+
+// The largest node for each cluster.
+//var clusters = new Array(m);
+var clusters = [{"cluster":1,"radius":8.652472483989106,"x":680.342284598155,"y":250.12776728277095},{"cluster":1,"radius":8.879179278774714,"x":641.8743222897693,"y":368.3138823170346},{"cluster":1,"radius":15.872464566805316,"x":542.6957837661549,"y":440.81918446558416},{"cluster":1,"radius":11.937497898017334,"x":418.20262550988167,"y":440.63017268736735},{"cluster":1,"radius":11.567291896921194,"x":318.46520193346703,"y":368.46631188678003},{"cluster":1,"radius":18.10990690694368,"x":280.1356113804504,"y":250.9617868952919},{"cluster":1,"radius":21.655097399465564,"x":318.33416021784694,"y":132.6160160066895},{"cluster":1,"radius":25.58397404678231,"x":418.7624233500745,"y":60.364797494123906},{"cluster":1,"radius":11.780550576498172,"x":542.1358541228628,"y":59.83455643195771},{"cluster":1,"radius":22.01040328442042,"x":642.4744278599328,"y":132.9522233809213}];
+
+console.log(clusters)
+
+// var nodes = d3.range(n).map(function() {
+//   var i = Math.floor(Math.random() * m),
+//       r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
+//       d = {
+//         cluster: i,
+//         radius: r,
+//         x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
+//         y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random()
+//       };
+//   if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
+//   return d;
+// });
+
+console.log(JSON.stringify(clusters))
+
+var nodes = [{"cluster":1,"radius":13.112535167220194,"x":418.4648776786116,"y":441.0390176088724},{"cluster":1,"radius":5.109421629313969,"x":418.3839366387755,"y":60.606761826883286},{"cluster":1,"radius":6.399684516410465,"x":280.5123371533118,"y":250.4649517014623},{"cluster":1,"radius":5.353685417110638,"x":642.5425979722578,"y":368.37664308782115},{"cluster":1,"radius":9.667569241896562,"x":542.7656292039256,"y":441.0557837912522},{"cluster":1,"radius":3.9384915875176345,"x":680.0402610462625,"y":250.84961532638408},{"cluster":1,"radius":1.571984771464654,"x":318.76885394246244,"y":368.4969821473249},{"cluster":1,"radius":2.8000264276137066,"x":680.1912934342399,"y":250.0133677246049},{"cluster":1,"radius":3.2017409371021435,"x":680.4692866180558,"y":250.32656607264653},{"cluster":1,"radius":19.854971638346925,"x":541.8850022851775,"y":59.846919028536604},{"cluster":1,"radius":12.293038053510433,"x":280.20919276657514,"y":250.61264462443071},{"cluster":1,"radius":24.228683858463427,"x":642.7223479043978,"y":133.03159999371124},{"cluster":1,"radius":7.445551802003653,"x":318.7010635899559,"y":368.01829506444193},{"cluster":1,"radius":6.613311649345535,"x":419.09800948325477,"y":440.54067466852143},{"cluster":1,"radius":12.752909334239735,"x":318.7326993926607,"y":133.1470062643159},{"cluster":1,"radius":3.141408731906364,"x":542.7264889135778,"y":440.570647446689},{"cluster":1,"radius":13.755586482500696,"x":642.4098821826565,"y":133.2761081772725},{"cluster":1,"radius":4.931984469659047,"x":418.3377779515639,"y":60.38438170587759},{"cluster":1,"radius":2.445757389387995,"x":680.970882355934,"y":250.9852028361056},{"cluster":1,"radius":10.048264745191311,"x":319.0026540209718,"y":367.62567051138177},{"cluster":1,"radius":10.39983124590512,"x":318.52875106089675,"y":368.06755438946567},{"cluster":1,"radius":12.684235707876542,"x":419.0639862479356,"y":440.9201516399801},{"cluster":1,"radius":16.23363287204945,"x":418.4745992746383,"y":59.879318685020536},{"cluster":1,"radius":18.02497885887232,"x":418.7211957502358,"y":60.01691493227261},{"cluster":1,"radius":11.285297578542357,"x":418.7766304740861,"y":60.58790621858205},{"cluster":1,"radius":14.947016158824683,"x":318.5242359466564,"y":132.48787076946905},{"cluster":1,"radius":11.206298258423418,"x":418.48457947379836,"y":59.86971273131783},{"cluster":1,"radius":13.511607088221218,"x":318.4231442227673,"y":132.85957208474724},{"cluster":1,"radius":4.732379180768487,"x":280.04184341803193,"y":250.58028729190121},{"cluster":1,"radius":1.2352164109864177,"x":418.7569385076121,"y":440.28775278899707},{"cluster":1,"radius":8.895406976516556,"x":318.76233593893164,"y":367.57319201516367},{"cluster":1,"radius":10.006870503999414,"x":642.7070683354332,"y":132.4979870586059},{"cluster":1,"radius":4.553119871283067,"x":418.2364502051559,"y":440.73105151813365},{"cluster":1,"radius":1.907476471999248,"x":680.2310793839861,"y":250.56989199179225},{"cluster":1,"radius":3.0394117753751795,"x":680.3522501494735,"y":250.19694326189347},{"cluster":1,"radius":6.016525965060481,"x":418.5518042755492,"y":60.139112553774595},{"cluster":1,"radius":2.872381632444971,"x":542.746360588987,"y":60.388233951275424},{"cluster":1,"radius":1.5966075120576124,"x":542.7116445900692,"y":60.511025942378865},{"cluster":1,"radius":3.840057623413583,"x":318.6269897067167,"y":133.32646446128933},{"cluster":1,"radius":8.406972561591243,"x":541.8765936295322,"y":60.40435167609826},{"cluster":1,"radius":3.916458268609747,"x":642.6492355816819,"y":367.946825842945},{"cluster":1,"radius":16.326819436800665,"x":418.89166257839577,"y":60.62329961683716},{"cluster":1,"radius":9.22233727188151,"x":642.1455657018168,"y":132.79580304993866},{"cluster":1,"radius":4.949697504719074,"x":542.2601767426177,"y":60.612892232584954},{"cluster":1,"radius":8.722515638011284,"x":542.2253147931125,"y":440.21506384389363},{"cluster":1,"radius":6.855578650920831,"x":418.24415036856124,"y":60.233010777720466},{"cluster":1,"radius":7.073883590865945,"x":542.8000601869362,"y":60.72529056852795},{"cluster":1,"radius":16.78960421360285,"x":542.0121300997498,"y":60.13127113178484},{"cluster":1,"radius":11.857361454549906,"x":318.3378990970731,"y":368.16993966150477},{"cluster":1,"radius":4.265035155032514,"x":418.5338251810235,"y":440.47479003250487},{"cluster":1,"radius":4.68332362027954,"x":280.58909451123327,"y":250.34044655528854},{"cluster":1,"radius":5.439826759386443,"x":542.6099695937529,"y":440.7048686016526},{"cluster":1,"radius":10.597133485971387,"x":641.9161224352948,"y":367.84427416544787},{"cluster":1,"radius":7.469391511040165,"x":280.5826266182121,"y":250.89719910267743},{"cluster":1,"radius":10.658392721920983,"x":319.08339869959207,"y":368.52847905560776},{"cluster":1,"radius":12.285946480007397,"x":642.5794645335345,"y":132.93746665691575},{"cluster":1,"radius":2.2303203475883446,"x":642.7450575448394,"y":367.7450547256638},{"cluster":1,"radius":2.105537168799785,"x":642.4128716226487,"y":133.3916666604447},{"cluster":1,"radius":7.372785450634035,"x":280.7644316069782,"y":250.6312318767887},{"cluster":1,"radius":6.278579466306951,"x":541.9869568910736,"y":440.6917293484032},{"cluster":1,"radius":5.319544639136849,"x":680.6861454262398,"y":250.17822758085094},{"cluster":1,"radius":22.5322144083228,"x":280.49568414967507,"y":250.1429544396233},{"cluster":1,"radius":12.184907388725737,"x":318.40450190409945,"y":367.77197859214067},{"cluster":1,"radius":3.1249446977364643,"x":680.2004468759988,"y":250.0629779114388},{"cluster":1,"radius":12.77251841235893,"x":318.8362684292432,"y":367.72203519159376},{"cluster":1,"radius":8.085296821574058,"x":418.60624254827314,"y":60.70792843981761},{"cluster":1,"radius":10.1694552815525,"x":319.1242634924773,"y":133.21675748413986},{"cluster":1,"radius":13.12463210625571,"x":641.9335938903323,"y":132.8155631764195},{"cluster":1,"radius":1.885091814686083,"x":680.0634421242867,"y":250.8720285347663},{"cluster":1,"radius":5.686142386574278,"x":318.68157234538273,"y":132.65334495961292},{"cluster":1,"radius":4.615095995753941,"x":319.04427285172903,"y":368.2790097879377},{"cluster":1,"radius":4.4293445362375765,"x":680.1900794992689,"y":250.19003518205136}];
+
+
+console.log(JSON.stringify(nodes))
+
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width, height])
+    .gravity(.02)
+    .charge(0)
+    .on("tick", tick)
+    .start();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var node = svg.selectAll("circle")
+    .data(nodes)
+  .enter().append("circle")
+    .style("fill", function(d) { return color(d.cluster); })
+    .call(force.drag);
+
+node.transition()
+    .duration(750)
+    .delay(function(d, i) { return i * 5; })
+    .attrTween("r", function(d) {
+      var i = d3.interpolate(0, d.radius);
+      return function(t) { return d.radius = i(t); };
+    });
+
+function tick(e) {
+  node
+      .each(cluster(10 * e.alpha * e.alpha))
+      .each(collide(.5))
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+// Move d to be adjacent to the cluster node.
+function cluster(alpha) {
+  return function(d) {
+    var cluster = clusters[d.cluster];
+    if (cluster === d) return;
+    var x = d.x - cluster.x,
+        y = d.y - cluster.y,
+        l = Math.sqrt(x * x + y * y),
+        r = d.radius + cluster.radius;
+    if (l != r) {
+      l = (l - r) / l * alpha;
+      d.x -= x *= l;
+      d.y -= y *= l;
+      cluster.x += x;
+      cluster.y += y;
+    }
+  };
+}
+
+// Resolves collisions between d and all other circles.
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+    var r = d.radius + maxRadius + Math.max(padding, clusterPadding),
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            r = d.radius + quad.point.radius + (d.cluster === quad.point.cluster ? padding : clusterPadding);
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}
+
+
+  $('svg circle').tipsy({ 
+    gravity: 'w', 
+    html: true, 
+    title: function() {
+      var d = this.__data__;
+      var c = d.cluster;
+      var id = d.radius
+      return "radius: " + d + '...Hi there! My color is <span style="color:' + c + '">' + c + '</span>'; 
+    }
+  });
+
+
+</script>

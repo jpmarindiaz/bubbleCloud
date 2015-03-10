@@ -1,0 +1,11 @@
+Package: bubbleCloud
+Type: Package
+Title: d3 bubble plots 
+Version: 1.0
+Date: 2015-03-05
+Author: Juan Pablo Marín Díaz
+Maintainer: Juan Pablo Marín Díaz <jpmarindiaz@gmail.com>
+Description: d3 bubble plots
+License: MIT + file LICENSE
+Imports:
+    htmlwidgets (>= 0.3)
