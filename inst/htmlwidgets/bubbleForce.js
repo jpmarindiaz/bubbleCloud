@@ -148,7 +148,7 @@ HTMLWidgets.widget({
                 var d = this.__data__;
                 var c = d.cluster;
                 var id = d.radius
-                return "radius: " + d + '...Hi there! My color is <span style="color:' + c + '">' + c + '</span>';
+                return "This is my Cluster: " + c + ' :)! ';
             }
         });
 
