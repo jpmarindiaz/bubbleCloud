@@ -15,12 +15,12 @@ bubbles <- function(data, name = "bubbleForce", width = NULL, height = NULL) {
 
   if (is.null(data$x)){
     message("No node x position provided: using random value")
-    data$x <- runif(nrow(data),1,10)
+    data$x <- runif(nrow(data),1,400)
   }
 
   if (is.null(data$y)){
     message("No node y position provided: using random value")
-    data$y <- runif(nrow(data),1,10)
+    data$y <- runif(nrow(data),1,400)
   }
 
   if (is.null(data$radius)){
@@ -28,9 +28,13 @@ bubbles <- function(data, name = "bubbleForce", width = NULL, height = NULL) {
     data$radius <- 5
   }
 
-  if (is.null(data$cluster)){
+  if (is.null(data$group)){
+    message("No group variable")
     data$cluster <- 0
+  } else{
+    data$cluster <- as.numeric(factor(data$group))-1
   }
+
 
   clusters <- ddply(data,.(cluster),function(r){
     r <- r[with(r,order(radius)),]
@@ -40,15 +44,25 @@ bubbles <- function(data, name = "bubbleForce", width = NULL, height = NULL) {
   n <- nrow(data)
   m <- nrow(clusters)
 
-  # Convert to array of objects
-  data <- apply(data, 1,function(r){
-    as.list(r)
-  })
-  names(data) <- NULL
+#   # Convert to array of objects
+#   data <- apply(data, 1,function(r){
+#     as.list(r)
+#   })
+#   names(data) <- NULL
 
-  clusters <- apply(clusters, 1,function(r){
-    as.list(r)
-  })
+
+#   apply(data[,2:4], 1,function(r){
+#     message(r)
+#     #r <- head(data,1)
+#     as.list(r)
+#   })
+#
+#   r <- head(data,1)
+# as.list(r)
+#
+#   clusters <- apply(clusters, 1,function(r){
+#     as.list(r)
+#   })
 
   x = list(
     n = n,
@@ -75,7 +89,7 @@ bubbles <- function(data, name = "bubbleForce", width = NULL, height = NULL) {
 #'
 #' @export
 bubblesOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'bubble', width, height, package = 'bubbleCloud')
+  shinyWidgetOutput(outputId, 'bubbleForce', width, height, package = 'bubbleCloud')
 }
 
 #' Widget render function for use in Shiny
@@ -83,5 +97,5 @@ bubblesOutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderBubbles <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, dimplerOutput, env, quoted = TRUE)
+  shinyRenderWidget(expr, bubblesOutput, env, quoted = TRUE)
 }

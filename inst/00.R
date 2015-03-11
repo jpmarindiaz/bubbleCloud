@@ -20,6 +20,24 @@ data3$cluster <- 0
 bubbles(data3)
 
 
-#data <- data[,1]
-#bubbles(data)
+d <- data.frame(groupo=sample(seq(1:6)-1,50, replace=TRUE))
+is.null(d$group)
+
+data <- data.frame(grou=sample(seq(1:6)-1,50, replace=TRUE))
+is.null(data$group)
+
+bubbles(data)
+
+
+df <- read.csv("inst/data/tags.csv")
+df <- df[c("tagL1")]
+names(df) <- "group"
+data <- df
+bubbles(data)
+
+
+renderBubbles(d)
+
+
+
 

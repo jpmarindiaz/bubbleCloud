@@ -7,6 +7,6 @@ Author: Juan Pablo Marín Díaz
 Maintainer: Juan Pablo Marín Díaz <jpmarindiaz@gmail.com>
 Description: d3 bubble plots
 License: MIT + file LICENSE
-Depends: plyr
+Depends: htmlwidgets, plyr
 Imports:
     htmlwidgets (>= 0.3)
