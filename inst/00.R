@@ -8,7 +8,13 @@ library(bubbleCloud)
 
 
 data <- read.csv("inst/data/bubbles.csv")
+
+
+bubblesForceInfobox(data)
+
+
 data2 <- data[1:50,]
+
 bubbles(data)
 bubbles(data2[c("cluster")])
 

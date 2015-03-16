@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Quien es quien</title>
+<!-- JavaScript Libraries //-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script src="./js/jquery-1.8.3.min.js"></script> -->
+<!-- <script src="./js/d3.min.js"></script> -->
+<!-- <script src="js/d3.min.js"></script> -->
+<!-- CSS Style //-->
+<link href="styles/style.css" rel="stylesheet" type="text/css">
+<script src="js/viz.js"></script>
+</head>
+
+
+<body>
+
+<div id="d3container">
+    <script>
+         d3.json("data/qesq-net.json", drawGraph);
+    </script>     
+  
+
+</div>
+
+<p style="text-align: center">&#169;2014 Visualización de datos por <a href="http://aentropi.co">aentropico</a>
+</p>
+<p>
+Agradecimiento a Mike Bostock y Alexander Simoes por sus librerías y código de visualización.</p>
+</body>
+</html>
