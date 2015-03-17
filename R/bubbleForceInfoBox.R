@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-bubbleForceInfobox <- function(data, opts=list(initInfobox=NULL),width = NULL, height = NULL) {
+bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
 
   name <- "bubbleForceInfobox"
   #   if(is.null(data$id)) data$id <- seq(1:nrow(data))
@@ -41,9 +41,9 @@ bubbleForceInfobox <- function(data, opts=list(initInfobox=NULL),width = NULL, h
     data$cluster <- as.numeric(factor(data$group))-1
   }
 
-  if(is.null(opts$initInfobox)){
+  #if(is.null(opts$initInfobox)){
     initInfobox <- "Haz click en los nodos para ver detalles!"
-  }
+  #}
 
 
   clusters <- ddply(data,.(cluster),function(r){
