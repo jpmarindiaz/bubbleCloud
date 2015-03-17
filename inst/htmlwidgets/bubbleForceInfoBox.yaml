@@ -12,7 +12,11 @@ dependencies:
     src: htmlwidgets/lib/jquery
     script: jquery.tipsy.js
   - name: tipsystyles
-    version: 0.2
+    version: 0.2.1
     src: htmlwidgets/lib/css
     stylesheet: tipsy.css
+  - name: styles
+    version: 0.1.1
+    src: htmlwidgets/lib/css
+    stylesheet: style.css    
 
