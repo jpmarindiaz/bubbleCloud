@@ -80,7 +80,7 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
 
 
   x = list(
-    settings = settings,
+#     settings = settings,
     n = n,
     m = m,
     data = data,

@@ -28,8 +28,10 @@ HTMLWidgets.widget({
         var width = el.offsetWidth;
         var height = el.offsetHeight;
 
+
         //Get options
-        var initInfobox = x.settings.initInfobox;
+        //var initInfobox = x.settings.initInfobox;
+        var initInfobox = "Haz click en los nodos para ver detalles!";
 
         // alias options
         // var width = 560;
