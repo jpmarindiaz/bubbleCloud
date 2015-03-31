@@ -19,6 +19,11 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
     data$htmlinfo <- "<h1>This</h1> is some <strong>html</strong>"
   }
 
+  if (is.null(data$hover)){
+    message("No hover provided: using number")
+    data$hover <- seq(1:nrow(data))
+  }
+
   if (is.null(data$x)){
     message("No node x position provided: using random value")
     data$x <- runif(nrow(data),1,400)
@@ -36,6 +41,7 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
 
   if (is.null(data$group)){
     message("No group variable")
+    data$clusterName <- ""
     data$cluster <- 0
   } else{
     data$cluster <- as.numeric(factor(data$group))-1
@@ -76,8 +82,6 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
   #   clusters <- apply(clusters, 1,function(r){
   #     as.list(r)
   #   })
-
-
 
   x = list(
 #     settings = settings,

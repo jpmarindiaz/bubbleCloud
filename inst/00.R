@@ -9,10 +9,9 @@ library(bubbleCloud)
 
 data <- read.csv("inst/data/bubbles.csv")
 
-data$htmlInfo <- paste("<h1>someLorem ipsum dolor sit amet</h1>, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat.",seq(1:nrow(data)))
+data$htmlInfo <- paste("<h1>someLorem ipsum dolor sit amet</h1>, consectetur adipisicing elit.",seq(1:nrow(data)))
+data$hover <- paste("Cluster: ",data$cluster)
+data$group <- data$cluster
 bubbleForceInfobox(data)
 
 
