@@ -3,8 +3,8 @@ library(devtools)
 library(htmlwidgets)
 
 
-devtools::install()
 document()
+devtools::install()
 library(bubbleCloud)
 
 
