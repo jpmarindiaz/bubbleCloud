@@ -4,6 +4,7 @@ library(htmlwidgets)
 
 
 devtools::install()
+document()
 library(bubbleCloud)
 
 
