@@ -8,4 +8,6 @@ Maintainer: Juan Pablo Marin Diaz <jpmarindiaz@gmail.com>
 Description: d3 bubble plots
 License: MIT + file LICENSE
 Imports:
-    htmlwidgets (>= 0.3), plyr
+	htmltools,
+    htmlwidgets (>= 0.3),
+    plyr
