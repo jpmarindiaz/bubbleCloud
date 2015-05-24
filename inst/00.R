@@ -12,7 +12,8 @@ data <- read.csv("inst/data/bubbles.csv")
 
 data$htmlInfo <- paste("<h1>someLorem ipsum dolor sit amet</h1>, consectetur adipisicing elit.",seq(1:nrow(data)))
 data$hover <- paste("Cluster: ",data$cluster)
-data$group <- data$cluster
+data$clusterLabel <- paste("clusterLabel: ",data$cluster)
+data$group <- paste0("GRUPO ",data$cluster)
 bubbleForceInfobox(data)
 
 

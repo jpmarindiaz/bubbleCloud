@@ -45,6 +45,7 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
     data$cluster <- 0
   } else{
     data$cluster <- as.numeric(factor(data$group))-1
+    data$clusterName <- data$group
   }
 
   #if(is.null(opts$initInfobox)){
@@ -109,7 +110,7 @@ bubbleForceInfobox <- function(data,width = NULL, height = NULL) {
 #' Widget output function for use in Shiny
 #'
 #' @export
-bubbleInfoboxOutput <- function(outputId, width = '100%', height = '400px'){
+bubbleInfoboxOutput <- function(outputId, width = '100%', height = '500px'){
   shinyWidgetOutput(outputId, 'bubbleForceInfobox', width, height, package = 'bubbleCloud')
 }
 

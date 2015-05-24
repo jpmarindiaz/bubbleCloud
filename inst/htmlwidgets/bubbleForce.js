@@ -140,7 +140,38 @@ HTMLWidgets.widget({
             };
         }
 
+        // Legend
+        // http://jsfiddle.net/Rom2BE/H2PkT/
+        var legendData = {clusterName: x.clusters.clusterName}
+        legendData = HTMLWidgets.dataframeToD3(legendData)
 
+        var legend = svg.selectAll(".legend")
+            .data(color.domain())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
+
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            // .style("fill", color);
+            .style("fill", function(d,i) {
+                return color(i);
+            });
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function(d) {
+                return d.clusterName;
+            });
+
+        // Tooltip
         $('svg circle').tipsy({
             gravity: 'w',
             html: true,

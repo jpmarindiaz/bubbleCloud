@@ -45,6 +45,7 @@ HTMLWidgets.widget({
 
         var color = d3.scale.category10()
             .domain(d3.range(m));
+        // console.log(color)
 
         // convert links and nodes data frames to d3 friendly format
         //var clusters = [{"cluster":0,"radius":8.652472483989106,"x":680.342284598155,"y":250.12776728277095},{"cluster":1,"radius":8.879179278774714,"x":641.8743222897693,"y":368.3138823170346},{"cluster":2,"radius":15.872464566805316,"x":542.6957837661549,"y":440.81918446558416},{"cluster":3,"radius":11.937497898017334,"x":418.20262550988167,"y":440.63017268736735},{"cluster":4,"radius":11.567291896921194,"x":318.46520193346703,"y":368.46631188678003},{"cluster":5,"radius":18.10990690694368,"x":280.1356113804504,"y":250.9617868952919},{"cluster":6,"radius":21.655097399465564,"x":318.33416021784694,"y":132.6160160066895},{"cluster":7,"radius":25.58397404678231,"x":418.7624233500745,"y":60.364797494123906},{"cluster":8,"radius":11.780550576498172,"x":542.1358541228628,"y":59.83455643195771},{"cluster":9,"radius":22.01040328442042,"x":642.4744278599328,"y":132.9522233809213}];
@@ -185,7 +186,42 @@ console.log(nodes)
                 });
             };
         }
+        // Legend
+        // http://jsfiddle.net/Rom2BE/H2PkT/
 
+        var legendData = {clusterName: x.clusters.clusterName}
+        legendData = HTMLWidgets.dataframeToD3(legendData)
+        // console.log("color.domain(): ",color.domain())
+        // console.log("Colors: ",color)
+        // console.log("Color 3: ",color(3))
+        // console.log(legendData)
+        
+        var legend = svg.selectAll(".legend")
+            .data(legendData)
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d, i) {
+                return "translate(0," + i * 20 + ")";
+            });
+
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", function(d,i) {
+                return color(i);
+            });
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function(d) {
+                return d.clusterName;
+            });
+
+        // Tooltip
 
         $('svg circle').tipsy({
             gravity: 'w',

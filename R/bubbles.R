@@ -88,7 +88,7 @@ bubbles <- function(data, name = "bubbleForce", width = NULL, height = NULL) {
 #' Widget output function for use in Shiny
 #'
 #' @export
-bubblesOutput <- function(outputId, width = '100%', height = '400px'){
+bubblesOutput <- function(outputId, width = '100%', height = '500px'){
   shinyWidgetOutput(outputId, 'bubbleForce', width, height, package = 'bubbleCloud')
 }
 
